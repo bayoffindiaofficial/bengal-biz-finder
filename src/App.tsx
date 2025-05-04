@@ -65,9 +65,9 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <AuthContext.Provider value={{ user, session }}>
         <TooltipProvider>
-          <Toaster />
-          <Sonner />
           <BrowserRouter>
+            <Toaster />
+            <Sonner />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/businesses" element={<BusinessList />} />
