@@ -1,8 +1,10 @@
 
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import BottomNavigation from "@/components/layout/BottomNavigation";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -15,6 +17,19 @@ const Auth = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is already logged in
+    const checkUser = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (data.session) {
+        navigate("/");
+      }
+    };
+    
+    checkUser();
+  }, [navigate]);
 
   const toggleAuthMode = () => {
     setIsLogin(!isLogin);
@@ -26,7 +41,7 @@ const Auth = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
@@ -64,15 +79,39 @@ const Auth = () => {
       return;
     }
 
-    // Simulate API call
-    setTimeout(() => {
-      // In a real app, we would make API calls to authenticate/register the user
-      console.log("Form submitted:", formData);
-      
-      // For now, we just show a message that this feature is coming soon
-      setError("This feature will be available soon after Supabase integration.");
+    try {
+      if (isLogin) {
+        const { error } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        });
+        
+        if (error) throw error;
+        
+        toast.success("Logged in successfully");
+        navigate("/");
+      } else {
+        const { error } = await supabase.auth.signUp({
+          email: formData.email,
+          password: formData.password,
+          options: {
+            data: {
+              name: formData.name,
+              phone: formData.phone,
+            }
+          }
+        });
+        
+        if (error) throw error;
+        
+        toast.success("Account created successfully");
+        navigate("/");
+      }
+    } catch (error: any) {
+      setError(error.message || "An error occurred during authentication");
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   return (

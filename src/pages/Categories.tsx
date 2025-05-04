@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import BottomNavigation from "@/components/layout/BottomNavigation";
 import { businessTypes } from "@/data/businessTypes";
+import { getCategoryIcon } from "@/components/category/CategoryIcons";
 
 const Categories = () => {
   return (
@@ -20,9 +21,7 @@ const Categories = () => {
                 className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow flex items-center"
               >
                 <div className="w-10 h-10 bg-bengalbiz-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4 shrink-0">
-                  <span className="text-bengalbiz-primary font-semibold">
-                    {category.charAt(0)}
-                  </span>
+                  {getCategoryIcon(category, { size: 20 })}
                 </div>
                 <span className="font-medium">{category}</span>
               </Link>

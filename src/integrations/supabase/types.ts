@@ -9,7 +9,83 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      business_photos: {
+        Row: {
+          business_id: string | null
+          created_at: string
+          id: string
+          url: string
+        }
+        Insert: {
+          business_id?: string | null
+          created_at?: string
+          id?: string
+          url: string
+        }
+        Update: {
+          business_id?: string | null
+          created_at?: string
+          id?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "business_photos_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      businesses: {
+        Row: {
+          address: string | null
+          area: string
+          created_at: string
+          description: string | null
+          district: string
+          email: string | null
+          id: string
+          name: string
+          phone: string
+          type: string
+          updated_at: string
+          user_id: string | null
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          area: string
+          created_at?: string
+          description?: string | null
+          district: string
+          email?: string | null
+          id?: string
+          name: string
+          phone: string
+          type: string
+          updated_at?: string
+          user_id?: string | null
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          area?: string
+          created_at?: string
+          description?: string | null
+          district?: string
+          email?: string | null
+          id?: string
+          name?: string
+          phone?: string
+          type?: string
+          updated_at?: string
+          user_id?: string | null
+          website?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
