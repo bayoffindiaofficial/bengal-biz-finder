@@ -1,7 +1,7 @@
 
 import { 
   Store, Utensils, ShoppingCart, Smartphone, Tv, Stethoscope, Building2, 
-  School, GraduationCap, BookOpen, Scissors, Spa, Dumbbell, Hotel, Scale, 
+  School, GraduationCap, BookOpen, Scissors, Leaf, Dumbbell, Hotel, Scale, 
   UserRound, Plug, Hammer, Wrench, Plane, Home, Shield, Landmark, CreditCard, 
   Gem, Ellipsis 
 } from "lucide-react";
@@ -41,7 +41,7 @@ export const getCategoryIcon = (category: string, props: IconProps = {}) => {
     case "Salon":
       return <Scissors {...iconProps} />;
     case "Spa":
-      return <Spa {...iconProps} />;
+      return <Leaf {...iconProps} />; // Replaced Spa with Leaf icon
     case "Gym":
       return <Dumbbell {...iconProps} />;
     case "Hotel":
