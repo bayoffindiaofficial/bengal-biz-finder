@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				bengalbiz: {
+					primary: '#1e40af',     // Deep blue
+					secondary: '#60a5fa',   // Lighter blue
+					accent: '#10b981',      // Green for accents/CTAs
+					background: '#f8fafc',  // Light gray background
+					muted: '#94a3b8',       // Muted text color
 				}
 			},
 			borderRadius: {
@@ -89,7 +97,10 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+			},
+			fontFamily: {
+				sans: ['Open Sans', 'sans-serif'],
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
